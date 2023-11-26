@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Detail</title>
+</head>
+<body>
+    <h1>Student Detail</h1>
+    <h2>{{ student.name }}</h2>
+    <p>Student ID: {{ student.student_id }}</p>
+    <!-- Add Course Link -->
+    {% for course in all_courses %}
+        <a href="{% url 'add_course' student.student_id course.pk %}">Add {{ course.name }}</a><br>
+    {% endfor %}
+
+
+    <h3>Courses:</h3>
+    <ul>
+        {% for course in student.courses.all %}
+            <li>{{ course.name }} - {{ course.code }}</li>
+        {% endfor %}
+    </ul>
+    <!-- Drop Course Link -->
+    {% for course in student.courses.all %}
+        <a href="{% url 'drop_course' student.student_id course.pk %}">Drop {{ course.name }}</a><br>
+    {% endfor %}
+</body>
+</html>
+
